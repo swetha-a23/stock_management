@@ -1,0 +1,108 @@
+type SupplierSchema {
+  supplier_id: Int!
+  supplier_name: String!
+  supplier_address: String!
+  contact_number: String!
+}
+
+type StockSchema {
+  stock_id: Int!
+  product_id: Int!
+  quantity: Int!
+  location: String!
+}
+
+type ConsumerSchema {
+  consumer_id: Int!
+  consumer_name: String!
+  consumer_address: String!
+  contact_number: String!
+}
+
+type ProductSchema {
+  product_id: Int!
+  product_name: String!
+  price: Float!
+  description: String!
+}
+
+type SupplierOrderSchema {
+  order_id: Int!
+  supplier_id: Int!
+  product_id: Int!
+  order_date: String!
+  quantity: Int!
+  total_amount: Int!
+}
+
+type CustomerOrderSchema {
+  order_id: Int!
+  consumer_id: Int!
+  product_id: Int!
+  order_date: String!
+  quantity: Int!
+  total_amount: Int!
+}
+
+type SupplierTransactionSchema {
+  transaction_id: Int!
+  product_id: Int!
+  supplier_id: Int!
+  transaction_date: String!
+  amount: Float!
+}
+
+type ConsumerTransactionSchema {
+  transaction_id: Int!
+  consumer_id: Int!
+  order_id: Int!
+  stock_id: Int!
+  transaction_date: String!
+  amount: Float!
+}
+
+type Query {
+  getAllSuppliers: [SupplierSchema!]!
+  getSupplierById(supplier_id: Int!): SupplierSchema
+  getAllStocks: [StockSchema!]!
+  getStockById(stock_id: Int!): StockSchema
+  getAllConsumers: [ConsumerSchema!]!
+  getConsumerById(consumer_id: Int!): ConsumerSchema
+  getAllProducts: [ProductSchema!]!
+  getProductById(product_id: Int!): ProductSchema
+  getAllSupplierOrders: [SupplierOrderSchema!]!
+  getSupplierOrderById(order_id: Int!): SupplierOrderSchema
+  getAllCustomerOrders: [CustomerOrderSchema!]!
+  getCustomerOrderById(order_id: Int!): CustomerOrderSchema
+  getAllSupplierTransactions: [SupplierTransactionSchema!]!
+  getSupplierTransactionById(transaction_id: Int!): SupplierTransactionSchema
+  getAllConsumerTransactions: [ConsumerTransactionSchema!]!
+  getConsumerTransactionById(transaction_id: Int!): ConsumerTransactionSchema
+}
+
+type Mutation {
+  create_supplier(supplier_name: String!, supplier_address: String!, contact_number: String!): SupplierSchema
+  update_supplier(supplier_id: Int!, supplier_name: String!, supplier_address: String!, contact_number: String!): SupplierSchema
+  delete_supplier(supplier_id: Int!): SupplierSchema
+  create_stock(product_id: Int!, quantity: Int!, location: String!): StockSchema
+  update_stock(stock_id: Int!, product_id: Int!, quantity: Int!, location: String!): StockSchema
+  delete_stock(stock_id: Int!): StockSchema
+  create_consumer(consumer_name: String!, consumer_address: String!, contact_number: String!): ConsumerSchema
+  update_consumer(consumer_id: Int!, consumer_name: String!, consumer_address: String!, contact_number: String!): ConsumerSchema
+  delete_consumer(consumer_id: Int!): ConsumerSchema
+  create_product(product_name: String!, price: Float!, description: String!): ProductSchema
+  update_product(product_id: Int!, product_name: String!, price: Float!, description: String!): ProductSchema
+  delete_product(product_id: Int!): ProductSchema
+  create_supplier_order(supplier_id: Int!, product_id: Int!, order_date: String!, quantity: Int!, total_amount: Int!): SupplierOrderSchema
+  update_supplier_order(order_id: Int!, supplier_id: Int!, product_id: Int!, order_date: String!, quantity: Int!, total_amount: Int!): SupplierOrderSchema
+  delete_supplier_order(order_id: Int!): SupplierOrderSchema
+  create_customer_order(consumer_id: Int!, product_id: Int!, order_date: String!, quantity: Int!, total_amount: Int!): CustomerOrderSchema
+  update_customer_order(order_id: Int!, consumer_id: Int!, product_id: Int!, order_date: String!, quantity: Int!, total_amount: Int!): CustomerOrderSchema
+  delete_customer_order(order_id: Int!): CustomerOrderSchema
+  create_supplier_transaction(product_id: Int!, supplier_id: Int!, transaction_date: String!, amount: Float!): SupplierTransactionSchema
+  update_supplier_transaction(transaction_id: Int!, product_id: Int!, supplier_id: Int!, transaction_date: String!, amount: Float!): SupplierTransactionSchema
+  delete_supplier_transaction(transaction_id: Int!): SupplierTransactionSchema
+  create_consumer_transaction(consumer_id: Int!, order_id: Int!, stock_id: Int!, transaction_date: String!, amount: Float!): ConsumerTransactionSchema
+  update_consumer_transaction(transaction_id: Int!, consumer_id: Int!, order_id: Int!, stock_id: Int!, transaction_date: String!, amount: Float!): ConsumerTransactionSchema
+  delete_consumer_transaction(transaction_id: Int!): ConsumerTransactionSchema
+}

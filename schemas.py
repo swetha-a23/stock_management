@@ -431,13 +431,14 @@ class Mutation:
         description: str
     ) -> ProductSchema:
         ProductDao = ProductDAO.update_product(product_id, product_name, amount, description)
-        ProductSchema = ProductSchema(
+        product_schema = ProductSchema(
             product_id=ProductDao.product_id,
             product_name=ProductDao.product_name,
             amount=ProductDao.amount,
             description=ProductDao.description
         )
-        return ProductSchema
+        return product_schema
+
 
 
     def delete_product(product_id: int) -> ProductSchema:

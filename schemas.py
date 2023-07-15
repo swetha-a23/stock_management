@@ -184,7 +184,7 @@ class Query:
             product_schema = ProductSchema(
                 product_id=product_dao.product_id,
                 product_name=product_dao.product_name,
-                amount=product_dao.amount,
+                amount=float(product_dao.amount),  # Convert Decimal to float
                 description=product_dao.description
             )
             return json.dumps(product_schema.__dict__)

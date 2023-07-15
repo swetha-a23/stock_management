@@ -4,8 +4,6 @@ from sqlalchemy.orm import joinedload
 
 import re
 
-from schemas import StockSchema
-
 class SupplierDAO:
     @staticmethod
     def get_supplier_by_id(supplier_id):
@@ -60,21 +58,7 @@ class StockDAO:
         session.commit()
         return stock
     
-    @staticmethod
-    def create_stock(product_id, quantity, location):
-        stock = Stock(product_id=product_id, quantity=quantity, location=location)
-        session.add(stock)
-        session.commit()
-        
-        stock_schema = StockSchema(
-            stock_id=stock.stock_id,
-            product_id=stock.product_id,
-            quantity=stock.quantity,
-            location=stock.location
-        )
-        
-        return stock_schema
-
+    
     @staticmethod
     def update_stock(stock_id, product_id, quantity, location):
         stock = StockDAO.get_stock_by_id(stock_id)

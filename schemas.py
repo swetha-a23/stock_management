@@ -411,15 +411,16 @@ class Mutation:
         product_name: str,
         amount: float,
         description: str
-    ) -> ProductSchema:
+    ) -> dict:
         ProductDao = ProductDAO.create_product(product_name, amount, description)
-        product_schema = ProductSchema(
-            product_id=ProductDao.product_id,
-            product_name=ProductDao.product_name,
-            amount=ProductDao.amount,
-            description=ProductDao.description
-        )
-        return product_schema
+        ProductSchema = {
+            "product_id": ProductDao.product_id,
+            "product_name": ProductDao.product_name,
+            "amount": ProductDao.amount,
+            "description": ProductDao.description
+        }
+        return vars(ProductSchema)
+
 
 
 

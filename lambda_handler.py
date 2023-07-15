@@ -1,8 +1,6 @@
 from schemas import *
 import json
-from database import init_database
 
-init_database()
 
 def lambda_handler(event, context):
     print(event)

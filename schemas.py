@@ -405,13 +405,14 @@ class Mutation:
         description: str
     ) -> ProductSchema:
         ProductDao = ProductDAO.create_product(product_name, amount, description)
-        ProductSchema = ProductSchema(
+        product_schema = ProductSchema(
             product_id=ProductDao.product_id,
             product_name=ProductDao.product_name,
             amount=ProductDao.amount,
             description=ProductDao.description
         )
-        return ProductSchema
+        return product_schema
+
 
 
     def update_product(

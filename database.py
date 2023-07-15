@@ -10,5 +10,5 @@ DATABASE_URI = "postgresql://postgres:database@database-1.cqv5dapod8ah.us-east-1
 # Create the engine
 engine = create_engine(DATABASE_URI)
 
-
+Base.metadata.create_all(engine)
 session = scoped_session(sessionmaker(bind=engine, autocommit=False, autoflush=False))

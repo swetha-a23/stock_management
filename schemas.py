@@ -4,7 +4,11 @@ from datetime import datetime
 from dao import *
 import json
 
-
+class ProductEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, ProductSchema):
+            return obj.__dict__
+        return super().default(obj)
 
 class SupplierSchema:
     supplier_id: int
@@ -178,6 +182,7 @@ class Query:
         return product_schemas
 
 
+
     def get_product_by_id(self, product_id: int) -> Optional[str]:
         product_dao = ProductDAO.get_product_by_id(product_id)
         if product_dao:
@@ -187,7 +192,7 @@ class Query:
                 amount=float(product_dao.amount) if product_dao.amount is not None else None,
                 description=product_dao.description if product_dao.description is not None else None
             )
-            return json.dumps(product_schema.__dict__)
+            return json.dumps(product_schema, cls=ProductEncoder)
         return None
 
     def get_all_supplier_orders(self) -> List[SupplierOrderSchema]:

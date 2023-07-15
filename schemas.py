@@ -419,7 +419,7 @@ class Mutation:
             "amount": ProductDao.amount,
             "description": ProductDao.description
         }
-        return vars(ProductSchema)
+        return ProductSchema
 
 
 

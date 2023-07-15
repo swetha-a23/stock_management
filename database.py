@@ -21,4 +21,3 @@ def init_database():
     session.commit()
     session.close()
 
-init_database()

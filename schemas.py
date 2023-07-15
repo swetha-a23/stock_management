@@ -150,13 +150,17 @@ class Query:
 
     
     def get_all_products(self) -> List[ProductSchema]:
-        ProductDao = ProductDAO.get_all_products()
-        ProductSchema = {}
-        ProductSchema["product_id"]=ProductDao.product_id
-        ProductSchema["product_name"]=ProductDao.product_name
-        ProductSchema["amount"] = ProductDao.amount
-        ProductSchema["description"] = ProductDao.description
-        return ProductSchema
+        product_daos = ProductDAO.get_all_products()
+        product_schemas = []
+        for product_dao in product_daos:
+            product_schema = {}
+            product_schema["product_id"] = product_dao.product_id
+            product_schema["product_name"] = product_dao.product_name
+            product_schema["amount"] = product_dao.amount
+            product_schema["description"] = product_dao.description
+            product_schemas.append(product_schema)
+        return product_schemas
+
 
     
     def get_product_by_id(self, product_id: int) -> ProductSchema:

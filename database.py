@@ -9,8 +9,7 @@ DATABASE_URI = "postgresql://postgres:database@database-1.cqv5dapod8ah.us-east-1
 engine = create_engine(DATABASE_URI)
 Session = sessionmaker(bind=engine)
 session=Session()
-def init_db(app):
-    app.cli.add_command(init_database)
+
 
 
 
@@ -21,3 +20,5 @@ def init_database():
     Base.metadata.create_all(bind=engine)
     session.commit()
     session.close()
+
+init_database()

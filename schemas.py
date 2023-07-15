@@ -82,13 +82,16 @@ class ConsumerTransactionSchema:
 class Query:
     
     def get_all_suppliers(self) -> List[SupplierSchema]:
-        SupplierDao = SupplierDAO.get_all_suppliers()
-        SupplierSchema = {}
-        SupplierSchema["supplier_id"]=SupplierDao.supplier_id
-        SupplierSchema["supplier_name"]=SupplierDao.supplier_name
-        SupplierSchema["supplier_address"]=SupplierDao.supplier_address
-        SupplierSchema["contact_number"]=SupplierDao.contact_number
-        return SupplierSchema
+        supplier_daos = SupplierDAO.get_all_suppliers()
+        supplier_schemas = []
+        for supplier_dao in supplier_daos:
+            supplier_schema = {}
+            supplier_schema["supplier_id"] = supplier_dao.supplier_id
+            supplier_schema["supplier_name"] = supplier_dao.supplier_name
+            supplier_schema["supplier_address"] = supplier_dao.supplier_address
+            supplier_schema["contact_number"] = supplier_dao.contact_number
+            supplier_schemas.append(supplier_schema)
+        return supplier_schemas
 
 
         
@@ -105,13 +108,17 @@ class Query:
 
     
     def get_all_stock(self) -> List[StockSchema]:
-        StockDao = StockDAO.get_all_stock()
-        StockSchema = {}
-        StockSchema["stock_id"]=StockDao.stock_id
-        StockSchema["product_id"]=StockDao.product_id
-        StockSchema["quantity"]=StockDao.quantity
-        StockSchema["location"]=StockDao.location
-        return StockSchema
+        stock_daos = StockDAO.get_all_stock()
+        stock_schemas = []
+        for stock_dao in stock_daos:
+            stock_schema = {}
+            stock_schema["stock_id"] = stock_dao.stock_id
+            stock_schema["product_id"] = stock_dao.product_id
+            stock_schema["quantity"] = stock_dao.quantity
+            stock_schema["location"] = stock_dao.location
+            stock_schemas.append(stock_schema)
+        return stock_schemas
+
         
 
     

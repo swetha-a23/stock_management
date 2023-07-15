@@ -178,7 +178,7 @@ class Query:
         return product_schemas
 
 
-    def get_product_by_id(self, product_id: int) -> Optional[ProductSchema]:
+    def get_product_by_id(self, product_id: int) -> Optional[str]:
         product_dao = ProductDAO.get_product_by_id(product_id)
         if product_dao:
             product_schema = ProductSchema(
@@ -187,7 +187,7 @@ class Query:
                 amount=product_dao.amount,
                 description=product_dao.description
             )
-            return product_schema
+            return json.dumps(product_schema.__dict__)
         return None
 
     def get_all_supplier_orders(self) -> List[SupplierOrderSchema]:

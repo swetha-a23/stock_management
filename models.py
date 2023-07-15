@@ -15,9 +15,9 @@ class Supplier(Base):
     supplier_address = Column(String(255))
     contact_number = Column(String)
 
-    products = relationship("Product", back_populates="supplier")
-    supplier_orders = relationship("SupplierOrder", backref="supplier")
-    supplier_transactions = relationship("SupplierTransaction", backref="supplier")
+    products = relationship("Product", back_populates="supplier", cascade="all, delete")
+    supplier_orders = relationship("SupplierOrder", backref="supplier", cascade="all, delete")
+    supplier_transactions = relationship("SupplierTransaction", backref="supplier", cascade="all, delete")
 
 
 class Product(Base):
@@ -30,8 +30,8 @@ class Product(Base):
 
     supplier_id = Column(Integer, ForeignKey('supplier.supplier_id'))
     supplier = relationship("Supplier", back_populates="products")
-    stocks = relationship("Stock", backref="product")
-    consumer_orders = relationship("ConsumerOrder", backref="product")
+    stocks = relationship("Stock", backref="product", cascade="all, delete")
+    consumer_orders = relationship("ConsumerOrder", backref="product", cascade="all, delete")
 
 
 class Stock(Base):
@@ -42,8 +42,8 @@ class Stock(Base):
     quantity = Column(Integer)
     location = Column(String)
 
-    supplier_orders = relationship("SupplierOrder", backref="stock")
-    consumer_transactions = relationship("ConsumerTransaction", backref="stock")
+    supplier_orders = relationship("SupplierOrder", backref="stock", cascade="all, delete")
+    consumer_transactions = relationship("ConsumerTransaction", backref="stock", cascade="all, delete")
 
 
 class Consumer(Base):
@@ -54,8 +54,8 @@ class Consumer(Base):
     consumer_address = Column(String(255))
     contact_number = Column(String)
 
-    consumer_orders = relationship("ConsumerOrder", backref="consumer")
-    consumer_transactions = relationship("ConsumerTransaction", backref="consumer")
+    consumer_orders = relationship("ConsumerOrder", backref="consumer", cascade="all, delete")
+    consumer_transactions = relationship("ConsumerTransaction", backref="consumer", cascade="all, delete")
 
 
 class SupplierOrder(Base):
@@ -97,7 +97,7 @@ class SupplierTransaction(Base):
     amount = Column(Numeric(10, 2), nullable=False)
     transaction_date = Column(DateTime, nullable=False)
 
-    supplier_order = relationship('SupplierOrder', backref='supplier_transactions')
+    supplier_order = relationship('SupplierOrder', backref='supplier_transactions', cascade="all, delete")
 
     def set_amount_from_order(self):
         if self.order_id:
@@ -114,8 +114,7 @@ class ConsumerTransaction(Base):
     transaction_date = Column(DateTime)
     amount = Column(Numeric(10, 2), nullable=False)
 
-    consumer_order = relationship('ConsumerOrder', backref='consumer_transactions')
-
+    consumer_order = relationship('ConsumerOrder', backref='consumer_transactions', cascade="all, delete")
 
     def set_amount_from_order(self):
         if self.order_id:

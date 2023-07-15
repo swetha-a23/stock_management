@@ -442,8 +442,9 @@ class Mutation:
 
 
     def delete_product(product_id: int) -> dict:
-        product_id = ProductDAO.delete_product(product_id)
-        return ProductSchema(product_id=product_id)
+        ProductDAO.delete_product(product_id)
+        return {"product_id": product_id}
+
 
 
     def create_supplier_order(

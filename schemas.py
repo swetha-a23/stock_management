@@ -429,7 +429,7 @@ class Mutation:
         product_name: str,
         amount: float,
         description: str
-    ) -> ProductSchema:
+    ) -> dict:
         ProductDao = ProductDAO.update_product(product_id, product_name, amount, description)
         product_schema = ProductSchema(
             product_id=ProductDao.product_id,

@@ -3,7 +3,7 @@ from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import relationship
 
 Base = declarative_base()
-DATABASE_URI = "postgresql://postgres:database@database-1.cqv5dapod8ah.us-east-1.rds.amazonaws.com:5432/sms_aws"
+engine = create_engine("postgresql://postgres:database@database-1.cqv5dapod8ah.us-east-1.rds.amazonaws.com:5432/sms_aws")
 Base.metadata.bind = engine
 
 

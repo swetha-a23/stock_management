@@ -1,8 +1,9 @@
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 from models import *
 from datetime import datetime
 from dao import *
 import json
+
 
 
 class SupplierSchema:
@@ -177,17 +178,16 @@ class Query:
         return product_schemas
 
 
-
-    def get_product_by_id(self, product_id: int) -> Optional[ProductSchema]:
+    def get_product_by_id(self, product_id: int) -> Optional[Dict[str, Any]]:
         product_dao = ProductDAO.get_product_by_id(product_id)
         if product_dao:
-            product_schema = ProductSchema(
-                product_id=product_dao.product_id,
-                product_name=product_dao.product_name,
-                amount=float(product_dao.amount) if product_dao.amount is not None else 0.0,
-                description=product_dao.description if product_dao.description is not None else ""
-            )
-            return product_schema
+            product_dict = {
+                "product_id": product_dao.product_id,
+                "product_name": product_dao.product_name,
+                "amount": product_dao.amount,
+                "description": product_dao.description
+            }
+            return product_dict
         return None
 
 

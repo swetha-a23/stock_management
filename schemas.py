@@ -29,10 +29,18 @@ class ConsumerSchema:
 
 
 class ProductSchema:
-    product_id: int
-    product_name: str
-    amount: float
-    description: str
+    def __init__(
+        self,
+        product_id: int,
+        product_name: str,
+        amount: float,
+        description: str
+    ):
+        self.product_id = product_id
+        self.product_name = product_name
+        self.amount = amount
+        self.description = description
+
 
 class SupplierOrderSchema:
     order_id: int
